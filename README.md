@@ -3,8 +3,9 @@ Hol - Helper of language
 
 Hol is an unofficial PHP library that helps you with the handling of multiple languages in your PHP project. It is not yet fully tested or fleshed out, but should contain most of what is needed for simple use.
 
-### Contents:
+Hol is © 2013 by Staffan Lindsgård and is made available to the general public under the GPLv3 license.
 
+### Contents:
 1. The usual disclaimer
 2. Installation, setup & use
 3. A longer explanation of the above
@@ -16,12 +17,18 @@ Hol is an unofficial PHP library that helps you with the handling of multiple la
 The usual disclaimer
 --------------------
 
-You know, I shouldn't really have to include this. You should be smart enough to figure this out by yourself. Here it is anyway; right at the top of the document. Aren't you happy?
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-#### By using this software, you agree to the following:
-This software is provided "as is" and any expressed or implied warranties, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose are disclaimed.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-In no event shall the regents or contributors be liable for any direct, indirect, incidental, special, exemplary or consequential damages (including, but not limited to, procurement of substitute goods or services; loss of use, data, or profits; or business interruption) however caused and on any theory of liability, whether in contract, strict liability or tort (including negligence or otherwise) arising in any way out of the use of this software, even if advised of the possibility of such damage.
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see http://www.gnu.org/licenses/.
 
 
 Installation, setup & use
@@ -133,20 +140,17 @@ Acknowledgments and credits
 ### People
 
 ##### My girlfriend
-Well, she hasn't contributed to or tested the code and she isn't really interested in hearing me talk about it, but at least she pretends to listen. Possibly because she knows I do the same when she talks about... Well, I can't remember what it is she talks about exactly. But at least I pretend to listen.
+Well, she hasn't contributed to or tested the code and she isn't very interested in hearing me talk about it, but at least she pretends to listen when I do. Possibly because she knows I do the same when she talks about... Well, I can't remember what it is she talks about exactly. But I nod and hum in an encouraging way when she does.
 
 ### External resources
-
-##### Icons
-This project uses the Flag Icon set by Mark James.
-
-Website: http://www.famfamfam.com/lab/icons/flags/
-
-##### json prettifyer function
-This project uses a function by BohwaZ that formats json code to be more readable.
-
-Website: http://bohwaz.net/
+* This project uses the Flag Icon set by Mark James. (http://www.famfamfam.com/lab/icons/flags/)
+* This project uses a function by BohwaZ that formats json code to be more readable. (http://bohwaz.net/)
 
 ### Websites I've visited a lot
 * php.net
 * stackoverflow.com
+
+### Q&A
+
+#####Q: Is it a coincidence that the name 'Hol' means 'language' in klingon?
+A: Not really.
