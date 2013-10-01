@@ -38,9 +38,9 @@ class language {
 
 
 	// --- Looks for a specific phrase and prints it.
-	public function phrase($phrase,$echo=1) {		// --- First argument is what phrase to print, second if you want to print it at once or just return it.
+	public function phrase($phrase,$echo=true) {		// --- First argument is what phrase to print, second if you want to echo it at once or just return it.
 		$return = ( isset($this->p->$phrase) ? $this->p->$phrase : $this->set['nophrase'] );	// --- If the specified phrase exists, return it. Otherwise, print an error.
-		if ($echo===1) {		// --- If second argument is 1 (which it is by default),
+		if ($echo===true) {		// --- If second argument is 1 (which it is by default),
 			echo $return;		// --- print the corresponding phrase at once.
 		} else {				// --- If second argument is anything but 1,
 			return $return;		// --- just return the corresponding phrase.
@@ -50,11 +50,11 @@ class language {
 
 
 	// --- Prints the ISO639 code for the current language.
-	public function langcode($v=1,$echo=1) {		// --- First argument lets the user choose between the ISO639-1 and ISO639-3 codes. Default is ISO639-1.
+	public function langcode($echo=true,$v=1) {		// --- First argument echoes or returns the result. Second argument lets the user choose between the ISO639-1 and ISO639-3 codes. Default is ISO639-1.
 		$return = ( $v==3 ? $this->p->pbook_meta['iso6393'] : $this->p->pbook_meta['iso6391'] );	// --- If the first argument is 3, get the ISO639-3 code. Otherwise, get the ISO639-1 code.
-		if ($echo===1) {		// --- If second argument is 1 (which it is by default),
+		if ($echo===true) {		// --- If first argument is true (which it is by default),
 			echo $return;		// --- print the language code.
-		} else {				// --- If second argument is anything but 1,
+		} else {				// --- If first argument is anything but true,
 			return $return;		// --- just return the language code.
 		}
 	}

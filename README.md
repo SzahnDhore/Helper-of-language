@@ -73,8 +73,35 @@ You should now be up and running. Congratulations.
 Functions and stuff
 -------------------
 
-$lang->phrase('fr_para')
-$lang->langcode()
+These functions are available to you after setting up the system.
+
+The following descriptions and examples assumes a variable name of `$lang` for the class and that all settings are at their default.
+
+### `$lang->phrase('foo')`
+Echoes the phrase corresponding to the keyword "foo".
+
+If you need to, you can tell the function to return the string instead of echoing it by setting a second argument to `false`, like so: `$lang->phrase('foo',false)`
+
+##### Order of logic
+1. Checks `$_GET` to see if there is a specified language. If `$_GET` isn't set, the default language is used.
+2. Looks up the keyword.
+	* If the keyword can't be found in the phrasebook for the specified language, the phrasebook for the default language is used.
+	* If the keyword can't be found in the phrasebook for the default language, the `nophrase` error string in the settings is used.
+3. Echoes or return the value.
+
+### `$lang->langlist()`
+Echoes a list of currently installed languages.
+
+*(( -- This section under construction. -- ))*
+
+### `$lang->langcode()`
+Echoes the ISO639 language code for the currently used language.
+
+By default, the ISO639-1 code is echoed. This is done because HTML uses that code and therefore it is the version you will most often need. You can specify that you want to return the code instead of echoing it by setting the first argument to `false` and that you want the ISO639-3 code instead of ISO639-1 by setting the second argument to `3`. Like so: `$lang->langlist(false,3)` 
+
+##### Order of logic
+1. Checks `$_GET` to see if there is a specified language. If `$_GET` isn't set, the default language is used.
+2. Looks up and echoes (or returns) the ISO639-1 or ISO639-3 code.
 
 
 Acknowledgments and credits
@@ -82,8 +109,12 @@ Acknowledgments and credits
 
 ### Icons
 
-This project uses the Flag Icon set by Mark James. If you like them you can find them at: http://www.famfamfam.com/lab/icons/flags/
+This project uses the Flag Icon set by Mark James.
 
-### json prettifyer
+Website: http://www.famfamfam.com/lab/icons/flags/
 
-This project uses a function by BohwaZ that formats json code to be more readable. His website is: http://bohwaz.net/
+### json prettifyer function
+
+This project uses a function by BohwaZ that formats json code to be more readable.
+
+Website: http://bohwaz.net/
