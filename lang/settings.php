@@ -8,12 +8,12 @@
 // ====================================================================================
 
 $settings = array(
+	'default'	=> 'swe',			// --- Default language to use if no value is passed to the constructor. This language file must be present in the library and should be complete.
+	'nophrase'	=> '(( -- ERROR: Phrase not in phrasebook. -- ))',		// --- String to replace any non-existing phrase.
 	'imgdir'	=> 'images',		// --- Directory where the images are located. Must be a child directory of the one this file resides in.
 	'pbdir'		=> 'library',		// --- Directory where the phrasebooks are located. Must be a child directory of the one this file resides in.
 	'libfile' 	=> 'library.json',	// --- Name of the file that stores the static library info.
 	'chgfile' 	=> '.changefile',	// --- Name of the file used to check for changes in the library.
-	'default'	=> 'swe',			// --- Default language to use if no value is passed to the constructor. This language file must be present in the library and should be complete.
-	'nophrase'	=> '(( -- ERROR: Phrase not in phrasebook. -- ))',		// --- String to replace any non-existing phrase.
 	'getvar'	=> 'l',				// --- Name of $_GET-variable for the language.
 	'll_class'	=> 'lang_list',		// --- Class name of the language list.
 );
