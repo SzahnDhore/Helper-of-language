@@ -1,5 +1,6 @@
 <?php
 
+// --- Setting up simple benchmarking for the script.
 $start_time = microtime(TRUE);
 
 // --- Makes sure that the output is sent as UTF-8 to the browser.
@@ -7,11 +8,9 @@ header('Content-Type: text/html; charset=utf-8');
 
 // --- Sets up support for different languages.
 include_once 'lang/class.language.php';		// --- Includes the language library.
-$lang = new language();		// --- Initiates the language library with the selected language.
+$lang = new language();						// --- Initiates the language library with the selected language.
 
-include_once 'lang/class.library.php';
-$lib = new library();
-
+// --- Time to output the actual HTML.
 ?><!DOCTYPE html>
 <html lang="<? $lang->langcode() ?>">
 	<head>
@@ -21,15 +20,18 @@ $lib = new library();
 	</head>
 	<body>
 		<h1><? $lang->phrase('fr_title') ?></h1>
-		<? $lib->langlist() ?>
+		<? $lang->langlist() ?>
 		<? $lang->phrase('fr_para') ?>
-
-		<? $lib->getLibrary() ?>
 
 <?php
 
+// --- Ends the benchmarking.
 $end_time = microtime(TRUE);
+
+// --- Calculates execution time.
 $total_time = round($end_time - $start_time,4);
+
+// --- Displays the time it took to execute the script.
 echo '
 		<p><strong>Script time:</strong> '.$total_time.' sec.</p>';
 

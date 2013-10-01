@@ -11,7 +11,7 @@ This software is provided "as is" and any expressed or implied warranties, inclu
 
 
 Installation, setup & use
--------------------------------
+-------------------------
 
 Hol was written to be simple to use. This also includes installing and setting up the system. There are only five simple steps from downloading the system to having it up and running:
 
@@ -68,3 +68,19 @@ $lang->phrase('string')
 This command will look for a corresponding entry in the appropriate phrasebook and return it. In this particualar case, it looks for the keyword "string" and returns whatever value is assigned to that keyword.
 
 You should now be up and running. Congratulations.
+
+
+Functions and stuff
+-------------------
+
+$lang->phrase('fr_para')
+$lang->langcode()
+
+
+Acknowledgments and credits
+---------------------------
+
+
+### Icons
+
+This project uses the Flag Icon set by Mark James. If you like them you can find them at: http://www.famfamfam.com/lab/icons/flags/
