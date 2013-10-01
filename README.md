@@ -36,13 +36,13 @@ Open the file named "settings.php" and edit the settings if needed. You should n
 #### 3. Add phrasebooks
 Create a phrasebook file having the name "xxx.php" (where "xxx" is the ISO 639-3 language code of the default language of the project) and put it in your library folder. For a reference of how the contents of the file should be formated, please see the included example files.
 
-To subsequently add a language to your system, all you have to do is to upload a new (correctly written) language file to the phrasebook folder.
+To subsequently add a language to your system, all you have to do is to upload a new (correctly written) language file to the phrasebook folder. This makes it very simple to support additional languages.
 
-#### Include the file "class.language.php" in your file
-You will need two lines of extra code in your project to set up the language. The first is to include the script in the file you want it in. Supposing that the file is in the root of your project and that you've copied the language library to a subfolder named "lang" you would use the following PHP to include it:
+#### 4. Include the file "class.language.php"
+You will need two lines of extra code in your project to set up the system for use. The first is to include the script in the file you want it in. Supposing that the file is in the root of your project and that you've copied the language library to a subfolder named "lang" you would use the following PHP to include it:
 
 ```php
-   include_once 'lang/class.language.php';
+include_once 'lang/class.language.php';
 ```
 
 Remember that you have to alter the path to "class.language.php" to reflect the setup on your server.
@@ -51,7 +51,7 @@ Remember that you have to alter the path to "class.language.php" to reflect the 
 The second line of code initiates the magic. Just add the following:
 
 ```php
-   $lang = new language();
+$lang = new language();
 ```
 
 Naturally, you can name the object whatever you want. I like "$lang" personally, but you can use "$l" instead if you want someting shorter.
