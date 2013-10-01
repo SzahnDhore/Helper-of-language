@@ -27,6 +27,8 @@ There you go, all set!
 
 ### A longer explanation of the above
 
+If you find the list above to be too brief for your liking (or you simply enjoy reading this document) you can find a more detailed guide below.
+
 #### 1. Copy the files to your server
 Upload the folder (along with with all its content) to the root of your project. You should now have a folder in your root called *lang* having all important content inside of it.
 
@@ -39,22 +41,30 @@ Create a phrasebook file having the name "xxx.php" (where "xxx" is the ISO 639-3
 To subsequently add a language to your system, all you have to do is to upload a new (correctly written) language file to the phrasebook folder. This makes it very simple to support additional languages.
 
 #### 4. Include the file "class.language.php"
-You will need two lines of extra code in your project to set up the system for use. The first is to include the script in the file you want it in. Supposing that the file is in the root of your project and that you've copied the language library to a subfolder named "lang" you would use the following PHP to include it:
+You will need two lines of extra code in your project to set up the system for use. The first is to include the script in the file you want to use it in. It should look something akin to this:
 
 ```php
 include_once 'lang/class.language.php';
 ```
 
-Remember that you have to alter the path to "class.language.php" to reflect the setup on your server.
+Naturally, you have to make sure that the path to "class.language.php" reflects the actual setup on your server.
 
-#### Initiate a new instance of the class "language"
-The second line of code initiates the magic. Just add the following:
+#### 5. Initiate a new instance of the class "language"
+The second line of code you need to add initiates the magic itself. Just add the following:
 
 ```php
 $lang = new language();
 ```
 
-Naturally, you can name the object whatever you want. I like "$lang" personally, but you can use "$l" instead if you want someting shorter.
+Naturally, you can name the object whatever you want. I like `$lang` personally, but you could, for instance, use `$l` for someting shorter.
 
-#### Call a phrase using the function "phrase"
-Now that everything is set up we can start using it.
+#### 6. Call a phrase using the function "phrase"
+Now that the system is set up we can start using it. Assuming everything is in order, the following command will return and echo a specified string:
+
+```php
+$lang->phrase('string')
+```
+
+This command will look for a corresponding entry in the appropriate phrasebook and return it. In this particualar case, it looks for the keyword "string" and returns whatever value is assigned to that keyword.
+
+You should now be up and running. Congratulations.
