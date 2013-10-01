@@ -92,12 +92,12 @@ If you need to, you can tell the function to return the string instead of echoin
 ### `$lang->langlist()`
 Echoes a list of currently installed languages.
 
-*(( -- This section under construction. -- ))*
+*(( -- This section is under construction. -- ))*
 
 ### `$lang->langcode()`
 Echoes the ISO639 language code for the currently used language.
 
-By default, the ISO639-1 code is echoed. This is done because HTML uses that code and therefore it is the version you will most often need. You can specify that you want to return the code instead of echoing it by setting the first argument to `false` and that you want the ISO639-3 code instead of ISO639-1 by setting the second argument to `3`. Like so: `$lang->langlist(false,3)` 
+By default, the ISO639-1 code is echoed. This is done because HTML uses that code and therefore it is the version you will most often need. You can specify that you want to return the code instead of echoing it by setting the first argument to `false` and that you want the ISO639-3 code instead of ISO639-1 by setting the second argument to `3`. Like so: `$lang->langlist(false,3)`
 
 ##### Order of logic
 1. Checks `$_GET` to see if there is a specified language. If `$_GET` isn't set, the default language is used.
