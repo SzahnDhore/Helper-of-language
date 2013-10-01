@@ -80,7 +80,10 @@ $lang->langcode()
 Acknowledgments and credits
 ---------------------------
 
-
 ### Icons
 
 This project uses the Flag Icon set by Mark James. If you like them you can find them at: http://www.famfamfam.com/lab/icons/flags/
+
+### json prettifyer
+
+This project uses a function by BohwaZ that formats json code to be more readable. His website is: http://bohwaz.net/
