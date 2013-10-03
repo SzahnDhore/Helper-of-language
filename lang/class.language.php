@@ -14,7 +14,7 @@ class language {
 
 	// --- Loads the correct phrasebook based on what language has been set.
 	public function __construct() {
-		include 'settings.php';		// --- Includes the settings file.
+		include dirname(__FILE__).'/settings.php';		// --- Includes the settings file.
 		$this->set = $settings;		// --- Stores the settings in a variable.
 		$this->wdir = $this->set['pbdir'].'/';	// --- Sets up the phrasebook directory.
 
