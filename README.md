@@ -147,8 +147,8 @@ Well, she hasn't contributed to or tested the code and she isn't very interested
 * This project uses a function by BohwaZ that formats json code to be more readable. (http://bohwaz.net/)
 
 ### Websites I've visited a lot
-* php.net
-* stackoverflow.com
+* http://www.php.net
+* http://www.stackoverflow.com
 
 ### Q&A
 
