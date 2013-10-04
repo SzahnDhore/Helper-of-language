@@ -10,8 +10,9 @@ Hol is © 2013 by Staffan Lindsgård and is made available to the general public
 2. Installation, setup & use
 3. A longer explanation of the above
 4. Functions and stuff
-5. Known bugs and limitations
-6. Acknowledgments and credits
+5. To do
+6. Known bugs and limitations
+7. Acknowledgments and credits
 
 
 The usual disclaimer
@@ -122,6 +123,12 @@ For the sake of accessibility you cannot return a list without text. If you only
 Echoes the ISO639 language code for the currently used language.
 
 By default, the ISO639-1 code is echoed. This is done because HTML uses that code and therefore it is the version you will most often need. You can specify that you want to return the code instead of echoing it by setting the first argument to `false` and that you want the ISO639-3 code instead of ISO639-1 by setting the second argument to `3`. Like so: `$lang->langlist(false,3)`
+
+
+To do
+-----
+
++ Add option to turn off fallback language. Makes it easier to spot untranslated phrases.
 
 
 Known bugs and limitations
