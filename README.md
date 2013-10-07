@@ -10,8 +10,9 @@ Hol is © 2013 by Staffan Lindsgård and is made available to the general public
 2. Installation, setup & use
 3. A longer explanation of the above
 4. Functions and stuff
-5. Known bugs and limitations
-6. Acknowledgments and credits
+5. To do
+6. Known bugs and limitations
+7. Acknowledgments and credits
 
 
 The usual disclaimer
@@ -124,6 +125,16 @@ Echoes the ISO639 language code for the currently used language.
 By default, the ISO639-1 code is echoed. This is done because HTML uses that code and therefore it is the version you will most often need. You can specify that you want to return the code instead of echoing it by setting the first argument to `false` and that you want the ISO639-3 code instead of ISO639-1 by setting the second argument to `3`. Like so: `$lang->langlist(false,3)`
 
 
+To do
+-----
+
++ Add option to turn off fallback language. Makes it easier to spot untranslated phrases.
++ Add other way than $_GET of setting the language. Will look into using the session variable and cookies.
++ Most likely change the default behavior from directly echoing the phrase to simply returning it.
++ + If so, there will probably not be an option to echo. Seem superflous (which is why I'll probably change in the first place).
++ Will look into how to best return more information about a language, such as text direction.
+
+
 Known bugs and limitations
 --------------------------
 
@@ -147,8 +158,8 @@ Well, she hasn't contributed to or tested the code and she isn't very interested
 * This project uses a function by BohwaZ that formats json code to be more readable. (http://bohwaz.net/)
 
 ### Websites I've visited a lot
-* php.net
-* stackoverflow.com
+* http://www.php.net
+* http://www.stackoverflow.com
 
 ### Q&A
 
