@@ -130,9 +130,11 @@ To do
 
 * Add option to turn off fallback language. Makes it easier to spot untranslated phrases.
 * Add other way than $_GET of setting the language. Will look into using the session variable and cookies.
-* Most likely change the default behavior from directly echoing the phrase to simply returning it.
-	* If so, there will probably not be an option to echo. Seem superflous (which is why I'll probably change in the first place).
-* Will look into how to best return more information about a language, such as text direction.
+* Change the default behavior from directly echoing the phrase to simply returning it.
+	* Remove the then obsolete option to return string.
+* Look into how to best return more information about a language, such as text direction.
+* Possibility to apply stuff to returned strings. Both globally and individually.
+* Review the settings to see if there is any fat to be trimmed.
 
 
 Known bugs and limitations
