@@ -134,7 +134,8 @@ To do
 	* Remove the then obsolete option to return string.
 * Look into how to best return more information about a language, such as text direction.
 * Possibility to apply stuff to returned strings. Both globally and individually.
-* Review the settings to see if there is any fat to be trimmed.
+* Review the settings and remove superflous options.
+* Add method of supporting varibles in string.
 
 
 Known bugs and limitations
