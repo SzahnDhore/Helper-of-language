@@ -12,16 +12,16 @@ $lang = new language();						// --- Initiates the language library with the sele
 
 // --- Time to output the actual HTML.
 ?><!DOCTYPE html>
-<html lang="<? $lang->langcode() ?>">
+<html lang="<?=$lang->langcode()?>">
 	<head>
 		<meta charset="UTF-8" />
-		<title><? $lang->phrase('fr_title') ?></title>
+		<title><?=$lang->phrase('fr_title')?></title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>
 	<body>
-		<h1><? $lang->phrase('fr_title') ?></h1>
-		<? $lang->langlist() ?>
-		<? $lang->phrase('fr_para') ?>
+		<h1><?=$lang->phrase('fr_title')?></h1>
+		<?=$lang->langlist()?>
+		<?=$lang->phrase('fr_para')?>
 
 <?php
 

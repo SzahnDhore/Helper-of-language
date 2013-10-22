@@ -18,18 +18,13 @@ Hol is © 2013 by Staffan Lindsgård and is made available to the general public
 The usual disclaimer
 --------------------
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see http://www.gnu.org/licenses/.
+You should have received a copy of the GNU General Public License along with this program. If not, see http://www.gnu.org/licenses/.
+
+This program uses modules licensed under the GNU Affero General Public License.
 
 
 Installation, setup & use
@@ -61,7 +56,7 @@ Open the file named "settings.php" and edit the settings if needed. You should n
 #### 3. Add phrasebooks
 Create a phrasebook file having the name "xxx.php" (where "xxx" is the ISO 639-3 language code of the default language of the project) and put it in your library folder. For a reference of how the contents of the file should be formated, please see the included example files.
 
-To subsequently add a language to your system, all you have to do is to upload a new (correctly written) language file to the phrasebook folder. This makes it very simple to support additional languages.
+To subsequently add a language to your system, all you have to do is to upload a new, correctly written and formatted, language file to the phrasebook folder. This makes it very simple for you to add more languages.
 
 #### 4. Include the file "class.language.php"
 You will need two lines of extra code in your project to set up the system for use. The first is to include the script in the file you want to use it in. It should look something akin to this:
@@ -79,10 +74,10 @@ The second line of code you need to add initiates the magic itself. Just add the
 $lang = new language();
 ```
 
-Naturally, you can name the object whatever you want. I like `$lang` personally, but you could, for instance, use `$l` for someting shorter.
+Naturally, you can name the object whatever you want. I like `$lang` personally, but you could, for instance, use `$l` if you like something shorter.
 
 #### 6. Call a phrase using the function "phrase"
-Now that the system is set up we can start using it. Assuming everything is in order, the following command will return and echo a specified string:
+Now that the system is set up we can start using it. Assuming everything is in order, the following command will return the specified string:
 
 ```php
 $lang->phrase('string')
@@ -96,45 +91,31 @@ You should now be up and running. Congratulations.
 Functions and stuff
 -------------------
 
-These functions are available to you after setting up the system.
-
 The following descriptions and examples assumes a variable name of `$lang` for the class and that all settings are at their default.
 
 ### `$lang->phrase('foo')`
-Echoes the phrase corresponding to the keyword "foo".
-
-If you need to, you can tell the function to return the string instead of echoing it by setting a second argument to `false`, like so: `$lang->phrase('foo',false)`
-
-##### Order of logic
-1. Checks `$_GET` to see if there is a specified language. If `$_GET` isn't set, the default language is used.
-2. Looks up the keyword.
-	* If the keyword can't be found in the phrasebook for the specified language, the phrasebook for the default language is used.
-	* If the keyword can't be found in the phrasebook for the default language, the `nophrase` error string in the settings is used.
-3. Echoes or return the value.
+Returns the phrase corresponding to the keyword "foo".
 
 ### `$lang->langlist()`
-Echoes a list of currently installed languages.
+Returns a list of currently installed languages. The list is an unordered list in HTML without line breaks or indentation.
 
-You can add images to the image directory and have the system fetch them as well. Each image should be in PNG-format and have the same filename as the ISO639-3 code of the corresponding language. So if you, for example, want a swedish flag to be displayed in the list you add a file named "swe.png" to the directory named "images" and call the function using the argument `true`, like so: `$lang->langlist(true)`
+You can add images to the image directory and have the system fetch them as well. Each image should be in PNG-format and have the same filename as the ISO639-3 code of the corresponding language. So if you, for example, want a swedish flag to be displayed in the list, you add a PNG-file named "swe.png" to the directory named "images" and call the function using the argument `true`, like so: `$lang->langlist(true)`
 
-For the sake of accessibility you cannot return a list without text. If you only want to display the images you should instead hide the text using CSS.
+You cannot return a list without the text. If you only want to display the images you should instead hide the text using CSS.
 
 ### `$lang->langcode()`
-Echoes the ISO639 language code for the currently used language.
+Returns the ISO639 language code for the currently used language.
 
-By default, the ISO639-1 code is echoed. This is done because HTML uses that code and therefore it is the version you will most often need. You can specify that you want to return the code instead of echoing it by setting the first argument to `false` and that you want the ISO639-3 code instead of ISO639-1 by setting the second argument to `3`. Like so: `$lang->langlist(false,3)`
+By default, the ISO639-1 code is returned. This is because HTML normally uses that code and is therefore the version you will most often need. You can specify that you want the ISO639-3 code instead of ISO639-1 by setting the argument to `3`. Like so: `$lang->langlist(3)`
 
 
 To do
 -----
 
 * Add option to turn off fallback language. Makes it easier to spot untranslated phrases.
-* Add other way than $_GET of setting the language. Will look into using the session variable and cookies.
-* Change the default behavior from directly echoing the phrase to simply returning it.
-	* Remove the then obsolete option to return string.
+* Add other way than $_GET to set the language. Will look into using the session variable and cookies.
 * Look into how to best return more information about a language, such as text direction.
 * Possibility to apply stuff to returned strings. Both globally and individually.
-* Review the settings and remove superflous options.
 * Add method of supporting varibles in string.
 
 
@@ -154,13 +135,13 @@ Acknowledgments and credits
 ### People
 
 ##### My girlfriend
-Well, she hasn't contributed to or tested the code and she isn't very interested in hearing me talk about it, but at least she pretends to listen when I do. Possibly because she knows I do the same when she talks about... Well, I can't remember what it is she talks about exactly. But I nod and hum in an encouraging way when she does.
+She hasn't contributed to or tested the code and she isn't very interested in hearing me talk about it, but at least she almost pretends to listen to me when I do. That's all I can ask for, I suppose.
 
 ### External resources
-* This project uses the Flag Icon set by Mark James. (http://www.famfamfam.com/lab/icons/flags/)
+* This project includes images from the Flag Icon set by Mark James. (http://www.famfamfam.com/lab/icons/flags/)
 * This project uses a function by BohwaZ that formats json code to be more readable. (http://bohwaz.net/)
 
-### Websites I've visited a lot
+### Websites I visit a lot during development
 * http://www.php.net
 * http://www.stackoverflow.com
 

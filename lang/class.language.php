@@ -38,48 +38,33 @@ class language {
 
 
 	// --- Looks for a specific phrase and prints it.
-	public function phrase($phrase,$echo=true) {		// --- First argument is what phrase to print, second if you want to echo it at once or just return it.
-		$return = ( isset($this->p->$phrase) ? $this->p->$phrase : $this->set['nophrase'] );	// --- If the specified phrase exists, return it. Otherwise, print an error.
-		if ($echo===true) {		// --- If second argument is 1 (which it is by default),
-			echo $return;		// --- print the corresponding phrase at once.
-		} else {				// --- If second argument is anything but 1,
-			return $return;		// --- just return the corresponding phrase.
-		}
+	public function phrase($phrase) {	// --- Takes the name of the phrase to print as an argument.
+		return ( isset($this->p->$phrase) ? $this->p->$phrase : $this->set['nophrase'] );	// --- If the specified phrase exists, return it. Otherwise, print the error phrase.
 	}
 
 
 
 	// --- Prints the ISO639 code for the current language.
-	public function langcode($echo=true,$v=1) {		// --- First argument echoes or returns the result. Second argument lets the user choose between the ISO639-1 and ISO639-3 codes. Default is ISO639-1.
-		$return = ( $v==3 ? $this->p->pbook_meta['iso6393'] : $this->p->pbook_meta['iso6391'] );	// --- If the first argument is 3, get the ISO639-3 code. Otherwise, get the ISO639-1 code.
-		if ($echo===true) {		// --- If first argument is true (which it is by default),
-			echo $return;		// --- print the language code.
-		} else {				// --- If first argument is anything but true,
-			return $return;		// --- just return the language code.
-		}
+	public function langcode($v=1) {		// --- The ergument lets the user choose between the ISO639-1 and ISO639-3 codes. Default is ISO639-1.
+		return ( $v==3 ? $this->p->pbook_meta['iso6393'] : $this->p->pbook_meta['iso6391'] );	// --- If the first argument is 3, return the ISO639-3 code. Otherwise, return the ISO639-1 code.
 	}
 
 
 
 	// --- Prints a list of currently supported languages, as defined in the settings.
 	public function langlist($flags=false) {
-		$ll = '
-		<ul class="'.$this->set['ll_class'].'">
-';
+		$ll = '<ul class="'.$this->set['ll_class'].'">';
 		$langs = $this->getLibrary();
 		foreach ($langs as $code => $name) {
 			if ($code=='_time' || $code=='_updated') {
 			} else {
 				$namestring = ($flags==true ? '<img class="'.$this->set['ll_class'].'_img" src="'.$this->set['imgdir'].'/'.$name['iso6393'].'.png" alt="'.$name['iso6393'].'" /><span class="'.$this->set['ll_class'].'_name">'.$name['name'].'</span>' : $name['name'] );
 				$lurl = ($code!=$this->set['default'] ? '?'.$this->set['getvar'].'='.$code : '' );
-				$ll .= '			<li class="'.$this->set['ll_class'].'_'.$code.'"><a href="'.$_SERVER['PHP_SELF'].$lurl.'">'.$namestring.'</a></li>
-';
+				$ll .= '<li class="'.$this->set['ll_class'].'_'.$code.'"><a href="'.$_SERVER['PHP_SELF'].$lurl.'">'.$namestring.'</a></li>';
 			}
 		}
-		$ll .= '		</ul>
-
-';
-		echo $ll;
+		$ll .= '</ul>';
+		return $ll;
 	}
 
 
@@ -111,7 +96,6 @@ class language {
 		} else {
 			return true;	// --- If they differ, the library has been updated.
 		}
-
 	}
 
 
@@ -133,7 +117,6 @@ class language {
 		include_once 'function.prettyjson.php';
 		file_put_contents($this->set['libfile'], json_readable_encode($library));
 		file_put_contents($this->set['chgfile'], $this->getDir());
-
 	}
 
 
@@ -147,9 +130,7 @@ class language {
 		}
 
 		$library = json_decode(file_get_contents($this->set['libfile']),true);
-
 		return $library;
-
 	}
 
 
