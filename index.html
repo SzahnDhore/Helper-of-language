@@ -31,37 +31,184 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+        <h1>
+<a name="hol---helper-of-language" class="anchor" href="#hol---helper-of-language"><span class="octicon octicon-link"></span></a>Hol - Helper of language</h1>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+<p>Hol is an unofficial PHP library that helps you with the handling of multiple languages in your PHP project. It is not yet fully tested or fleshed out, but should contain most of what is needed for simple use.</p>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<p>Hol is © 2013 by Staffan Lindsgård and is made available to the general public under the GPLv3 license.</p>
 
 <h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<a name="contents" class="anchor" href="#contents"><span class="octicon octicon-link"></span></a>Contents:</h3>
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+<ol>
+<li>The usual disclaimer</li>
+<li>Installation, setup &amp; use</li>
+<li>A longer explanation of the above</li>
+<li>Functions and stuff</li>
+<li>To do</li>
+<li>Known bugs and limitations</li>
+<li>Acknowledgments and credits</li>
+</ol><h2>
+<a name="the-usual-disclaimer" class="anchor" href="#the-usual-disclaimer"><span class="octicon octicon-link"></span></a>The usual disclaimer</h2>
+
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU General Public License along with this program. If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.</p>
+
+<p>This program uses modules licensed under the GNU Affero General Public License.</p>
+
+<h2>
+<a name="installation-setup--use" class="anchor" href="#installation-setup--use"><span class="octicon octicon-link"></span></a>Installation, setup &amp; use</h2>
+
+<p>Hol was written to be simple to use. This also includes installing and setting up the system. There are only five simple steps from downloading the system to having it up and running:</p>
+
+<ol>
+<li>Copy the files to your server.</li>
+<li>Edit the settings.</li>
+<li>Add phrasebooks.</li>
+<li>Include the file "class.language.php".</li>
+<li>Initiate a new instance of the class "language".</li>
+<li>Call a phrase using the function "phrase".</li>
+</ol><p>There you go, all set!</p>
+
+<h2>
+<a name="a-longer-explanation-of-the-above" class="anchor" href="#a-longer-explanation-of-the-above"><span class="octicon octicon-link"></span></a>A longer explanation of the above</h2>
+
+<p>If you find the list above to be too brief for your liking (or you simply enjoy reading this document) you can find a more detailed guide below.</p>
+
+<h4>
+<a name="1-copy-the-files-to-your-server" class="anchor" href="#1-copy-the-files-to-your-server"><span class="octicon octicon-link"></span></a>1. Copy the files to your server</h4>
+
+<p>Upload the folder (along with with all its content) to the root of your project. You should now have a folder in your root called <em>lang</em> having all important content inside of it.</p>
+
+<h4>
+<a name="2-edit-the-settings" class="anchor" href="#2-edit-the-settings"><span class="octicon octicon-link"></span></a>2. Edit the settings</h4>
+
+<p>Open the file named "settings.php" and edit the settings if needed. You should normally only need to modify the setting for <code>default</code>, and maybe <code>nophrase</code>. The other settings shouldn't really need to be modified, but if you have to change them they're there.</p>
+
+<h4>
+<a name="3-add-phrasebooks" class="anchor" href="#3-add-phrasebooks"><span class="octicon octicon-link"></span></a>3. Add phrasebooks</h4>
+
+<p>Create a phrasebook file having the name "xxx.php" (where "xxx" is the ISO 639-3 language code of the default language of the project) and put it in your library folder. For a reference of how the contents of the file should be formated, please see the included example files.</p>
+
+<p>To subsequently add a language to your system, all you have to do is to upload a new, correctly written and formatted, language file to the phrasebook folder. This makes it very simple for you to add more languages.</p>
+
+<h4>
+<a name="4-include-the-file-classlanguagephp" class="anchor" href="#4-include-the-file-classlanguagephp"><span class="octicon octicon-link"></span></a>4. Include the file "class.language.php"</h4>
+
+<p>You will need two lines of extra code in your project to set up the system for use. The first is to include the script in the file you want to use it in. It should look something akin to this:</p>
+
+<div class="highlight highlight-php"><pre><span class="k">include_once</span> <span class="s1">'lang/class.language.php'</span><span class="p">;</span>
+</pre></div>
+
+<p>Naturally, you have to make sure that the path to "class.language.php" reflects the actual setup on your server.</p>
+
+<h4>
+<a name="5-initiate-a-new-instance-of-the-class-language" class="anchor" href="#5-initiate-a-new-instance-of-the-class-language"><span class="octicon octicon-link"></span></a>5. Initiate a new instance of the class "language"</h4>
+
+<p>The second line of code you need to add initiates the magic itself. Just add the following:</p>
+
+<div class="highlight highlight-php"><pre><span class="nv">$lang</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">language</span><span class="p">();</span>
+</pre></div>
+
+<p>Naturally, you can name the object whatever you want. I like <code>$lang</code> personally, but you could, for instance, use <code>$l</code> if you like something shorter.</p>
+
+<h4>
+<a name="6-call-a-phrase-using-the-function-phrase" class="anchor" href="#6-call-a-phrase-using-the-function-phrase"><span class="octicon octicon-link"></span></a>6. Call a phrase using the function "phrase"</h4>
+
+<p>Now that the system is set up we can start using it. Assuming everything is in order, the following command will return the specified string:</p>
+
+<div class="highlight highlight-php"><pre><span class="nv">$lang</span><span class="o">-&gt;</span><span class="na">phrase</span><span class="p">(</span><span class="s1">'string'</span><span class="p">)</span>
+</pre></div>
+
+<p>This command will look for a corresponding entry in the appropriate phrasebook and return it. In this particualar case, it looks for the keyword "string" and returns whatever value is assigned to that keyword.</p>
+
+<p>You should now be up and running. Congratulations.</p>
+
+<h2>
+<a name="functions-and-stuff" class="anchor" href="#functions-and-stuff"><span class="octicon octicon-link"></span></a>Functions and stuff</h2>
+
+<p>The following descriptions and examples assumes a variable name of <code>$lang</code> for the class and that all settings are at their default.</p>
 
 <h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+<a name="lang-phrasefoo" class="anchor" href="#lang-phrasefoo"><span class="octicon octicon-link"></span></a><code>$lang-&gt;phrase('foo')</code>
+</h3>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+<p>Returns the phrase corresponding to the keyword "foo".</p>
 
 <h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+<a name="lang-langlist" class="anchor" href="#lang-langlist"><span class="octicon octicon-link"></span></a><code>$lang-&gt;langlist()</code>
+</h3>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+<p>Returns a list of currently installed languages. The list is an unordered list in HTML without line breaks or indentation.</p>
+
+<p>You can add images to the image directory and have the system fetch them as well. Each image should be in PNG-format and have the same filename as the ISO639-3 code of the corresponding language. So if you, for example, want a swedish flag to be displayed in the list, you add a PNG-file named "swe.png" to the directory named "images" and call the function using the argument <code>true</code>, like so: <code>$lang-&gt;langlist(true)</code></p>
+
+<p>You cannot return a list without the text. If you only want to display the images you should instead hide the text using CSS.</p>
+
+<h3>
+<a name="lang-langcode" class="anchor" href="#lang-langcode"><span class="octicon octicon-link"></span></a><code>$lang-&gt;langcode()</code>
+</h3>
+
+<p>Returns the ISO639 language code for the currently used language.</p>
+
+<p>By default, the ISO639-1 code is returned. This is because HTML normally uses that code and is therefore the version you will most often need. You can specify that you want the ISO639-3 code instead of ISO639-1 by setting the argument to <code>3</code>. Like so: <code>$lang-&gt;langlist(3)</code></p>
+
+<h2>
+<a name="to-do" class="anchor" href="#to-do"><span class="octicon octicon-link"></span></a>To do</h2>
+
+<ul>
+<li>Add option to turn off fallback language. Makes it easier to spot untranslated phrases.</li>
+<li>Add other way than $_GET to set the language. Will look into using the session variable and cookies.</li>
+<li>Look into how to best return more information about a language, such as text direction.</li>
+<li>Possibility to apply stuff to returned strings. Both globally and individually.</li>
+<li>Add method of supporting varibles in string.</li>
+</ul><h2>
+<a name="known-bugs-and-limitations" class="anchor" href="#known-bugs-and-limitations"><span class="octicon octicon-link"></span></a>Known bugs and limitations</h2>
+
+<h3>
+<a name="phrasebook-uploading" class="anchor" href="#phrasebook-uploading"><span class="octicon octicon-link"></span></a>Phrasebook uploading</h3>
+
+<p>After uploading multiple phrasebooks you may find that the system doesn't find them all. The solution is to upload them one by one and refresh the library between each upload. I'm not sure why this is happening, but I'm looking into it.</p>
+
+<h3>
+<a name="dropped--in-list" class="anchor" href="#dropped--in-list"><span class="octicon octicon-link"></span></a>Dropped <code>&lt;</code> in list</h3>
+
+<p>I've observed a dropped <code>&lt;</code> character in the language list. It only seems to happen after I've uploaded a phrasebook and after refreshing a couple of times the character is back again. Not a priority at the moment.</p>
+
+<h2>
+<a name="acknowledgments-and-credits" class="anchor" href="#acknowledgments-and-credits"><span class="octicon octicon-link"></span></a>Acknowledgments and credits</h2>
+
+<h3>
+<a name="people" class="anchor" href="#people"><span class="octicon octicon-link"></span></a>People</h3>
+
+<h5>
+<a name="my-girlfriend" class="anchor" href="#my-girlfriend"><span class="octicon octicon-link"></span></a>My girlfriend</h5>
+
+<p>She hasn't contributed to or tested the code and she isn't very interested in hearing me talk about it, but at least she almost pretends to listen to me when I do. That's all I can ask for, I suppose.</p>
+
+<h3>
+<a name="external-resources" class="anchor" href="#external-resources"><span class="octicon octicon-link"></span></a>External resources</h3>
+
+<ul>
+<li>This project includes images from the Flag Icon set by Mark James. (<a href="http://www.famfamfam.com/lab/icons/flags/">http://www.famfamfam.com/lab/icons/flags/</a>)</li>
+<li>This project uses a function by BohwaZ that formats json code to be more readable. (<a href="http://bohwaz.net/">http://bohwaz.net/</a>)</li>
+</ul><h3>
+<a name="websites-i-visit-a-lot-during-development" class="anchor" href="#websites-i-visit-a-lot-during-development"><span class="octicon octicon-link"></span></a>Websites I visit a lot during development</h3>
+
+<ul>
+<li><a href="http://www.php.net">http://www.php.net</a></li>
+<li><a href="http://www.stackoverflow.com">http://www.stackoverflow.com</a></li>
+</ul><h3>
+<a name="qa" class="anchor" href="#qa"><span class="octicon octicon-link"></span></a>Q&amp;A</h3>
+
+<h5>
+<a name="q-is-it-a-coincidence-that-the-name-hol-means-language-in-klingon" class="anchor" href="#q-is-it-a-coincidence-that-the-name-hol-means-language-in-klingon"><span class="octicon octicon-link"></span></a>Q: Is it a coincidence that the name 'Hol' means 'language' in klingon?</h5>
+
+<p>A: Not really.</p>
       </section>
     </div>
 
