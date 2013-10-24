@@ -9,92 +9,96 @@
 // ====================================================================================
 
 
+// --- This is the class we'll be working with.
 class language {
 
 
 	// --- Loads the correct phrasebook based on what language has been set.
 	public function __construct() {
-		include dirname(__FILE__).'/settings.php';		// --- Includes the settings file.
-		$this->set = $settings;		// --- Stores the settings in a variable.
-		$this->wdir = $this->set['pbdir'].'/';	// --- Sets up the phrasebook directory.
+		include dirname(__FILE__).'/settings.php';	// --- Includes the settings file.
+		$this->settings = $settings;				// --- Stores the settings in a class-wide variable.
+		$this->phrasebookdir = $this->settings['phrasebookdir'].'/';	// --- Sets the phrasebook directory to a class-wide variable.
 
-		$l = (isset($_GET[$this->set['getvar']]) ? $_GET[$this->set['getvar']] : $this->set['default'] );	// --- Recieves the incoming language variable and, if it isn't empty, assigns it to a variable.
-		$this->l = $l;		// --- We need access to the language throughout the class.
+		$specified_lang = (isset($_GET[$this->settings['lang_variable']]) ? $_GET[$this->settings['lang_variable']] : $this->settings['default_lang'] );	// --- Recieves the incoming language variable and, if it isn't empty, assigns it to a variable.
 
-		if (file_exists($this->set['pbdir'].'/'.$this->set['default'].'.php')) {	// --- If a phrasebook for the default language exists,
-			include_once $this->set['pbdir'].'/'.$this->set['default'].'.php';		// --- include it in the script and...
-			$pdef = $p;																// --- ... load the default phrasebook into an array.
-		} else { $pdef = array(); }													// --- If the phrasebook doesn't exist we set an empty array.
+		if (file_exists($this->phrasebookdir.$this->settings['default_lang'].'.php')) {	// --- If a phrasebook for the default language exists,
+			include_once $this->phrasebookdir.$this->settings['default_lang'].'.php';	// --- include it in the script and...
+			$default_phrasebook = $phrasebook;											// --- ... load the default phrasebook into an array.
+		} else {
+			$default_phrasebook = array();												// --- If the phrasebook doesn't exist we set an empty array.
+		}
 
-		if (file_exists($this->set['pbdir'].'/'.$l.'.php')) {		// --- If a phrasebook for the specified language exists,
-			include_once $this->set['pbdir'].'/'.$l.'.php';			// --- include it in the script and...
-			$pspc = $p;												// --- ... load the specified phrasebook into an array.
-		} else { $pspc = array(); }									// --- If the phrasebook doesn't exist we set an empty array.
+		if ($specified_lang!=$this->settings['default_lang'] && file_exists($this->phrasebookdir.$specified_lang.'.php')) {		// --- If the specified language isn't the same as the default and a phrasebook for the specified language exists,
+			include_once $this->phrasebookdir.$specified_lang.'.php';		// --- include it in the script and...
+			$specified_phrasebook = $phrasebook;							// --- ... load the specified phrasebook into an array.
+		} else {
+			$specified_phrasebook = array();								// --- If the phrasebook doesn't exist we set an empty array.
+		}
 
-		$this->p = (object) array_merge($pdef,$pspc);		// --- Merge the default and the specified phrasebooks, overwriting default values with specific ones.
+		$this->phrasebook = (object) array_merge($default_phrasebook,$specified_phrasebook);	// --- Merge the default and the specified phrasebooks, overwriting default values with specific ones.
 
 	}
 
 
 
 	// --- Looks for a specific phrase and prints it.
-	public function phrase($phrase) {	// --- Takes the name of the phrase to print as an argument.
-		return ( isset($this->p->$phrase) ? $this->p->$phrase : $this->set['nophrase'] );	// --- If the specified phrase exists, return it. Otherwise, print the error phrase.
+	public function phrase($phrase) {																				// --- Takes the name of the phrase to print as an argument.
+		return ( isset($this->phrasebook->$phrase) ? $this->phrasebook->$phrase : $this->settings['nophrase'] );	// --- If the specified phrase exists, return it. Otherwise, print the error phrase.
 	}
 
 
 
-	// --- Prints the ISO639 code for the current language.
-	public function langcode($v=1) {		// --- The ergument lets the user choose between the ISO639-1 and ISO639-3 codes. Default is ISO639-1.
-		return ( $v==3 ? $this->p->pbook_meta['iso6393'] : $this->p->pbook_meta['iso6391'] );	// --- If the first argument is 3, return the ISO639-3 code. Otherwise, return the ISO639-1 code.
+	// --- Returns information about the language.
+	public function getinfo($type='iso6391') {			// --- The argument lets the user choose what information to return. Default is ISO6391-code.
+		return $this->phrasebook->pbook_meta[$type];	// --- Returns the information specified.
 	}
 
 
 
 	// --- Prints a list of currently supported languages, as defined in the settings.
 	public function langlist($flags=false) {
-		$ll = '<ul class="'.$this->set['ll_class'].'">';
-		$langs = $this->getLibrary();
-		foreach ($langs as $code => $name) {
+		$language_list = '<ul class="'.$this->settings['lang_list_class'].'">';
+		$library = $this->getLibrary();
+		foreach ($library as $code => $name) {
 			if ($code=='_time' || $code=='_updated') {
 			} else {
-				$namestring = ($flags==true ? '<img class="'.$this->set['ll_class'].'_img" src="'.$this->set['imgdir'].'/'.$name['iso6393'].'.png" alt="'.$name['iso6393'].'" /><span class="'.$this->set['ll_class'].'_name">'.$name['name'].'</span>' : $name['name'] );
-				$lurl = ($code!=$this->set['default'] ? '?'.$this->set['getvar'].'='.$code : '' );
-				$ll .= '<li class="'.$this->set['ll_class'].'_'.$code.'"><a href="'.$_SERVER['PHP_SELF'].$lurl.'">'.$namestring.'</a></li>';
+				$namestring = ($flags==true ? (file_exists($this->settings['imagedir'].'/'.$name['iso6393'].'.png') ? '<img class="'.$this->settings['lang_list_class'].'_img" src="'.$this->settings['imagedirurl'].'/'.$name['iso6393'].'.png" alt="'.$name['iso6393'].'" /><span class="'.$this->settings['lang_list_class'].'_name">'.$name['name'].'</span>' : '<span class="'.$this->settings['lang_list_class'].'_name">'.$name['name'].'</span>' ) : $name['name'] );
+				$lurl = ($code!=$this->settings['default'] ? '?'.$this->settings['lang_variable'].'='.$code : '' );
+				$language_list .= '<li class="'.$this->settings['lang_list_class'].'_'.$code.'"><a href="'.$_SERVER['PHP_SELF'].$lurl.'">'.$namestring.'</a></li>';
 			}
 		}
-		$ll .= '</ul>';
-		return $ll;
+		$language_list .= '</ul>';
+		return $language_list;
 	}
 
 
 
 	// --- Reads the contents of a directory and returns an array with names and dates of modification for each file.
 	private function getDir() {
-		$ignore = array('.','..');		// --- We don't want to list everything.
-		$pbdir = opendir($this->wdir);	// --- The directory is opened for reading.
+		$ignore = array('.','..');						// --- We don't want to list everything.
+		$phrasebookdir = opendir($this->phrasebookdir);	// --- The directory is opened for reading.
 
-		while ($file = readdir($pbdir)) {	// --- Looks for files in the directory.
-			if (in_array($file,$ignore) == false) {			// --- Ignores the files specified above.
-				$filemod = filectime($this->wdir.$file);	// --- Checks the current file for time of modification.
-				$files[$filemod] = $file;	// --- Writes the filename and modification time to an array.
+		while ($file = readdir($phrasebookdir)) {		// --- Looks for files in the directory.
+			if (in_array($file,$ignore) == false) {		// --- Ignores the filetypes specified above.
+				$modified = filectime($this->phrasebookdir.$file);	// --- Checks the current file for time of modification.
+				$files[$modified] = $file;				// --- Writes the filename and modification time to an array.
 			}
 		}
 
-		closedir($this->wdir);		// --- When we're done with all files, the directory is closed.
-		asort($files);				// --- The array is sorted, keeping the key associations.
-		return json_encode($files);	// --- Then the array is converted into json format and sent.
+		closedir($this->phrasebookdir);	// --- When we're done with all files, so the directory is closed.
+		asort($files);					// --- The array is sorted, keeping the key associations.
+		return json_encode($files);		// --- Then the array is converted into json format and sent.
 	}
 
 
 
 	// --- Checks for changes to the library folder.
 	private function changed() {
-		$file = (file_exists($this->set['chgfile']) ? file_get_contents($this->set['chgfile']) : '' );	// --- Looks for a file having the same kind of information as getDir() returns.
-		if ($this->getDir() === $file) {	// --- Checks to see if the info in the file and the live info differs.
-			return false;	// --- If they are the same, the library has not been updated.
+		$changefile = (file_exists($this->settings['changefile']) ? file_get_contents($this->settings['changefile']) : '' );	// --- Looks for a file having the same kind of information as getDir() returns.
+		if ($this->getDir() === $changefile) {	// --- Checks to see if the info in the file and the live info differs.
+			return false;						// --- If they are the same, the library has not been updated.
 		} else {
-			return true;	// --- If they differ, the library has been updated.
+			return true;						// --- If they differ, the library has been updated.
 		}
 	}
 
@@ -105,18 +109,16 @@ class language {
 		$files = json_decode($this->getDir(),true);		// --- Gets a list of the current files and their timestamps in the directory.
 		$library = array('_time' => time() );			// --- Adds a timestamp of modification to the library catalog.
 
-		foreach ($files as $mod => $name) {
-			include $this->wdir.$name;
-			$iso6393 = $p['pbook_meta']['iso6393'];
-
-			foreach ($p['pbook_meta'] as $key => $value) {
-				$library[$iso6393][$key] = $value;
+		foreach ($files as $modified => $filename) {
+			include $this->phrasebookdir.$filename;
+			foreach ($phrasebook['pbook_meta'] as $key => $value) {
+				$library[$phrasebook['pbook_meta']['iso6393']][$key] = $value;
 			}
 		}
 
 		include_once 'function.prettyjson.php';
-		file_put_contents($this->set['libfile'], json_readable_encode($library));
-		file_put_contents($this->set['chgfile'], $this->getDir());
+		file_put_contents($this->settings['libraryfile'], json_readable_encode($library));
+		file_put_contents($this->settings['changefile'], $this->getDir());
 	}
 
 
@@ -124,13 +126,9 @@ class language {
 	private function getLibrary() {
 		if ($this->changed() === true) {
 			$this->update();
-			$updated = true;
-		} else {
-			$updated = false;
 		}
 
-		$library = json_decode(file_get_contents($this->set['libfile']),true);
-		return $library;
+		return json_decode(file_get_contents($this->settings['libraryfile']),true);
 	}
 
 

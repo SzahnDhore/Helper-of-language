@@ -8,14 +8,30 @@ Version numbering follows the pattern: *[major].[minor].[miniscule]*. All number
 * **Miniscule** updates contain very small edits.
 
 
+v1.3.1 // 2013-10-24
+---------------------------
+
+### Added
++ Added function `getinfo()` which returns any specified meta information about a language.
+
+### Changed
+* Changed many variables to become more descriptive.
+* Updated demo page with to work with new code and to have some basic CSS.
+* Minor updates and optimizations to the code.
+* Minor updates to the comments.
+
+### Removed
+- Removed function `langcode()` which returns the specified language code. This feature is instead covered by the `getinfo()` function.
+
+
 v1.2.1 // 2013-10-22
 ---------------------------
 
 ### Added
-+ Added this changelog.
++ This changelog.
 
 ### Changed
-* Changed the script from echoing phrases by default to only returning them.
+* The `phrase()` function from echoing phrases by default to only returning them.
 * Updated the README to reflect other changes.
 
 

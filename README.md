@@ -103,10 +103,12 @@ You can add images to the image directory and have the system fetch them as well
 
 You cannot return a list without the text. If you only want to display the images you should instead hide the text using CSS.
 
-### `$lang->langcode()`
-Returns the ISO639 language code for the currently used language.
+### `$lang->getinfo()`
+Returns specified meta info for the currently used language.
 
-By default, the ISO639-1 code is returned. This is because HTML normally uses that code and is therefore the version you will most often need. You can specify that you want the ISO639-3 code instead of ISO639-1 by setting the argument to `3`. Like so: `$lang->langlist(3)`
+By default, the ISO639-1 code is returned. You can specify any meta information by including it as an argument, like so: `$lang->getinfo('name')` or so `$lang->getinfo('direction')`.
+
+Please note that the `name`, `iso6391` and `iso6393` meta information is required for the script to work properly and that `direction` is recommended.
 
 
 To do
@@ -114,9 +116,9 @@ To do
 
 * Add option to turn off fallback language. Makes it easier to spot untranslated phrases.
 * Add other way than $_GET to set the language. Will look into using the session variable and cookies.
-* Look into how to best return more information about a language, such as text direction.
 * Possibility to apply stuff to returned strings. Both globally and individually.
 * Add method of supporting varibles in string.
+* Finish commenting the code.
 
 
 Known bugs and limitations
@@ -136,6 +138,9 @@ Acknowledgments and credits
 
 ##### My girlfriend
 She hasn't contributed to or tested the code and she isn't very interested in hearing me talk about it, but at least she almost pretends to listen to me when I do. That's all I can ask for, I suppose.
+
+##### Rogeru
+Has provided some helpful information
 
 ### External resources
 * This project includes images from the Flag Icon set by Mark James. (http://www.famfamfam.com/lab/icons/flags/)
