@@ -140,7 +140,7 @@ Acknowledgments and credits
 She hasn't contributed to or tested the code and she isn't very interested in hearing me talk about it, but at least she almost pretends to listen to me when I do. That's all I can ask for, I suppose.
 
 ##### Rogeru
-Has provided some helpful information
+Has provided helpful comments on the code.
 
 ### External resources
 * This project includes images from the Flag Icon set by Mark James. (http://www.famfamfam.com/lab/icons/flags/)
