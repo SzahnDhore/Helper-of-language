@@ -40,8 +40,6 @@ $lang = new language();						// --- Initiates the language library with the sele
 			<dd><?=$lang->getinfo('direction')?></dd>
 		</dl>
 		<?=$lang->langlist(true)?>
-		<hr />
-		<pre><? print_r($lang->getDir()) ?></pre>
 <?php
 
 // --- Ends the benchmarking.
