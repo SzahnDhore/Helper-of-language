@@ -63,8 +63,8 @@ class language {
 			if ($code=='_time' || $code=='_updated') {
 			} else {
 				$namestring = ($flags==true ? (file_exists($this->settings['imagedir'].'/'.$name['iso6393'].'.png') ? '<img class="'.$this->settings['lang_list_class'].'_img" src="'.$this->settings['imagedirurl'].'/'.$name['iso6393'].'.png" alt="'.$name['iso6393'].'" /><span class="'.$this->settings['lang_list_class'].'_name">'.$name['name'].'</span>' : '<span class="'.$this->settings['lang_list_class'].'_name">'.$name['name'].'</span>' ) : $name['name'] );
-				$lurl = ($code!=$this->settings['default'] ? '?'.$this->settings['lang_variable'].'='.$code : '' );
-				$language_list .= '<li class="'.$this->settings['lang_list_class'].'_'.$code.'"><a href="'.$_SERVER['PHP_SELF'].$lurl.'">'.$namestring.'</a></li>';
+				$url = ($code!=$this->settings['default'] ? '?'.$this->settings['lang_variable'].'='.$code : '' );
+				$language_list .= '<li class="'.$this->settings['lang_list_class'].'_'.$code.'"><a href="'.$_SERVER['PHP_SELF'].$url.'">'.$namestring.'</a></li>';
 			}
 		}
 		$language_list .= '</ul>';
@@ -74,19 +74,19 @@ class language {
 
 
 	// --- Reads the contents of a directory and returns an array with names and dates of modification for each file.
-	private function getDir() {
+	public function getDir() {
 		$ignore = array('.','..');						// --- We don't want to list everything.
 		$phrasebookdir = opendir($this->phrasebookdir);	// --- The directory is opened for reading.
 
 		while ($file = readdir($phrasebookdir)) {		// --- Looks for files in the directory.
 			if (in_array($file,$ignore) == false) {		// --- Ignores the filetypes specified above.
 				$modified = filectime($this->phrasebookdir.$file);	// --- Checks the current file for time of modification.
-				$files[$modified] = $file;				// --- Writes the filename and modification time to an array.
+				$files[$file] = $modified;				// --- Writes the filename and modification time to an array.
 			}
 		}
 
 		closedir($this->phrasebookdir);	// --- When we're done with all files, so the directory is closed.
-		asort($files);					// --- The array is sorted, keeping the key associations.
+		ksort($files);					// --- The array is sorted, keeping the key associations.
 		return json_encode($files);		// --- Then the array is converted into json format and sent.
 	}
 
@@ -104,19 +104,19 @@ class language {
 
 
 
-	// --- Updates the library file. Does not check for updates first.
+	// --- Updates the library file.
 	private function update() {
-		$files = json_decode($this->getDir(),true);		// --- Gets a list of the current files and their timestamps in the directory.
-		$library = array('_time' => time() );			// --- Adds a timestamp of modification to the library catalog.
+		$files = json_decode($this->getDir(),true);	// --- Gets a list of the current files and their timestamps in the directory.
+		$library = array('_time' => time() );		// --- Adds a timestamp of modification to the library catalog.
+		include_once 'function.prettyjson.php';
 
-		foreach ($files as $modified => $filename) {
+		foreach ($files as $filename => $modified) {
 			include $this->phrasebookdir.$filename;
 			foreach ($phrasebook['pbook_meta'] as $key => $value) {
 				$library[$phrasebook['pbook_meta']['iso6393']][$key] = $value;
 			}
 		}
 
-		include_once 'function.prettyjson.php';
 		file_put_contents($this->settings['libraryfile'], json_readable_encode($library));
 		file_put_contents($this->settings['changefile'], $this->getDir());
 	}

@@ -8,6 +8,13 @@ Version numbering follows the pattern: *[major].[minor].[miniscule]*. All number
 * **Miniscule** updates contain very small edits.
 
 
+v1.3.2 // 2013-10-24
+---------------------------
+
+### Changed
+* Fixed bug where all languages were not shown in HTML list.
+
+
 v1.3.1 // 2013-10-24
 ---------------------------
 

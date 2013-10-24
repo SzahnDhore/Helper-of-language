@@ -124,9 +124,6 @@ To do
 Known bugs and limitations
 --------------------------
 
-### Phrasebook uploading
-After uploading multiple phrasebooks you may find that the system doesn't find them all. The solution is to upload them one by one and refresh the library between each upload. I'm not sure why this is happening, but I'm looking into it.
-
 ### Dropped `<` in list
 I've observed a dropped `<` character in the language list. It only seems to happen after I've uploaded a phrasebook and after refreshing a couple of times the character is back again. Not a priority at the moment.
 
