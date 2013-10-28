@@ -1,11 +1,9 @@
 language: php
 
-before_install:
- - php /home/travis/.phpenv/versions/5.3.26/bin/composer.phar self-update
-
 php:
- - 5.3
- - 5.4
- - 5.5
+  - 5.2
+  - 5.3
+  - 5.4
+  - 5.5
 
-script: ./vendor/bin/phpunit
+script: phpunit --coverage-text
