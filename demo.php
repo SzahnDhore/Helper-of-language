@@ -8,14 +8,15 @@ header('Content-Type: text/html; charset=utf-8');
 
 // --- Sets up support for different languages.
 include_once 'lang/class.language.php';		// --- Includes the language library.
-$lang = new language();						// --- Initiates the language library with the selected language.
+$lang = new language();						// --- Initiates the language library.
 
 // --- Time to output the actual HTML.
 ?><!DOCTYPE html>
-<html lang="<?=$lang->getinfo()?>">
+<!-- To get the most out of these comments, please look at the source code before being parsed by PHP. -->
+<html lang="<?=$lang->getinfo()?>"> <!-- getinfo() returns the two letter language code by default. -->
 	<head>
 		<meta charset="UTF-8" />
-		<title><?=$lang->phrase('fr_title')?></title>
+		<title><?=$lang->phrase('fr_title')?></title> <!-- phrase() returns the specified phrase. -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<style type="text/css">
 			html { background-color:#823345; }
@@ -25,9 +26,11 @@ $lang = new language();						// --- Initiates the language library with the sele
 			dd { clear:right; height:2em; }
 		</style>
 	</head>
-	<body<?=($lang->getinfo('direction')=='rtl'?' style="direction:rtl;text-align:right;"':'')?>>
+	<body<?=($lang->getinfo('direction')=='rtl'?' style="direction:rtl;text-align:right;"':'')?>> <!-- Here we use language info and PHP to print the text direction, but only if it's RTL. -->
 		<h1><?=$lang->phrase('fr_title')?></h1>
-		<?=$lang->langlist()?>
+		<!-- This is the default language list, without any arguments passed. -->
+<?=$lang->langlist()?>
+
 		<p><?=$lang->phrase('fr_para')?></p>
 		<dl>
 			<dt><?=$lang->phrase('name')?></dt>
@@ -39,7 +42,9 @@ $lang = new language();						// --- Initiates the language library with the sele
 			<dt><?=$lang->phrase('direction')?></dt>
 			<dd><?=$lang->getinfo('direction')?></dd>
 		</dl>
-		<?=$lang->langlist(true)?>
+		<!-- This is a language list with a tab depth of 2, a custom class name and images. -->
+		<?=$lang->langlist(2,'this_is_a_custom_classname',true)?>
+
 <?php
 
 // --- Ends the benchmarking.
@@ -49,10 +54,7 @@ $end_time = microtime(TRUE);
 $total_time = round($end_time - $start_time,4);
 
 // --- Displays the time it took to execute the script.
-echo '
-		<p><strong>Script time:</strong> '.$total_time.' sec.</p>';
-
 ?>
-
+		<p><strong>Script time:</strong> <?=$total_time?> sec.</p>
 	</body>
 </html>

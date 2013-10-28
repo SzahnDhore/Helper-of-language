@@ -5,17 +5,28 @@ Version numbering follows the pattern: *[major].[minor].[miniscule]*. All number
 
 * **Major** updates have new or significantly altered features.
 * **Minor** updates have slightly altered features and/or a more efficient code.
-* **Miniscule** updates contain very small edits.
+* **Miniscule** updates contain small edits and bugfixes.
 
 
-v1.3.2 // 2013-10-24
+v0.4.1 // 2013-10-24
+---------------------------
+
+### Added
++ langlist() now takes two additional arguments; number of tabbed indentations and custom class name.
+
+### Changed
+* langlist() now outputs HTML with new lines and indentations in it.
+* Fleshed out 'demo.php' with some comments.
+
+
+v0.3.2 // 2013-10-24
 ---------------------------
 
 ### Changed
 * Fixed bug where all languages were not shown in HTML list.
 
 
-v1.3.1 // 2013-10-24
+v0.3.1 // 2013-10-24
 ---------------------------
 
 ### Added
@@ -31,7 +42,7 @@ v1.3.1 // 2013-10-24
 - Removed function `langcode()` which returns the specified language code. This feature is instead covered by the `getinfo()` function.
 
 
-v1.2.1 // 2013-10-22
+v0.2.1 // 2013-10-22
 ---------------------------
 
 ### Added
@@ -42,7 +53,7 @@ v1.2.1 // 2013-10-22
 * Updated the README to reflect other changes.
 
 
-v1.1.1
+v0.0.1
 ------
 
 First public release.

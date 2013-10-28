@@ -19,7 +19,7 @@ class language {
 		$this->settings = $settings;				// --- Stores the settings in a class-wide variable.
 		$this->phrasebookdir = $this->settings['phrasebookdir'].'/';	// --- Sets the phrasebook directory to a class-wide variable.
 
-		$specified_lang = (isset($_GET[$this->settings['lang_variable']]) ? $_GET[$this->settings['lang_variable']] : $this->settings['default_lang'] );	// --- Recieves the incoming language variable and, if it isn't empty, assigns it to a variable.
+		$specified_lang = ( isset($_GET[$this->settings['lang_variable']]) ? $_GET[$this->settings['lang_variable']] : $this->settings['default_lang'] );	// --- Recieves the incoming language variable and, if it isn't empty, assigns it to a variable.
 
 		if (file_exists($this->phrasebookdir.$this->settings['default_lang'].'.php')) {	// --- If a phrasebook for the default language exists,
 			include_once $this->phrasebookdir.$this->settings['default_lang'].'.php';	// --- include it in the script and...
@@ -56,18 +56,25 @@ class language {
 
 
 	// --- Prints a list of currently supported languages, as defined in the settings.
-	public function langlist($flags=false) {
-		$language_list = '<ul class="'.$this->settings['lang_list_class'].'">';
+	public function langlist($tabs=0,$classname='',$flags=false) {
+		$tabs_li = str_repeat('	', $tabs+1);
+		$tabs = str_repeat('	', $tabs);
+
+		$classname = ( $classname!='' ? $classname : $this->settings['lang_list_class'] );
+
+		$language_list = "\n".$tabs.'<ul class="'.$classname.'">'."\n";
 		$library = $this->getLibrary();
 		foreach ($library as $code => $name) {
 			if ($code=='_time' || $code=='_updated') {
 			} else {
-				$namestring = ($flags==true ? (file_exists($this->settings['imagedir'].'/'.$name['iso6393'].'.png') ? '<img class="'.$this->settings['lang_list_class'].'_img" src="'.$this->settings['imagedirurl'].'/'.$name['iso6393'].'.png" alt="'.$name['iso6393'].'" /><span class="'.$this->settings['lang_list_class'].'_name">'.$name['name'].'</span>' : '<span class="'.$this->settings['lang_list_class'].'_name">'.$name['name'].'</span>' ) : $name['name'] );
-				$url = ($code!=$this->settings['default'] ? '?'.$this->settings['lang_variable'].'='.$code : '' );
-				$language_list .= '<li class="'.$this->settings['lang_list_class'].'_'.$code.'"><a href="'.$_SERVER['PHP_SELF'].$url.'">'.$namestring.'</a></li>';
+				$url = 'http://'.$_SERVER['HTTP_HOST'].rtrim(dirname($_SERVER['PHP_SELF']), '/\\').$_SERVER['PHP_SELF'];
+
+				$namestring = ($flags==true ? (file_exists($this->settings['imagedir'].'/'.$name['iso6393'].'.png') ? '<img class="'.$classname.'_img" src="'.$this->settings['imagedirurl'].'/'.$name['iso6393'].'.png" alt="'.$name['iso6393'].'" /><span class="'.$classname.'_name">'.$name['name'].'</span>' : '<span class="'.$classname.'_name">'.$name['name'].'</span>' ) : $name['name'] );
+				$url .= ($code!=$this->settings['default_lang'] ? '?'.$this->settings['lang_variable'].'='.$code : '' );
+				$language_list .= $tabs_li.'<li class="'.$classname.'_'.$code.'"><a href="'.$url.'">'.$namestring.'</a></li>'."\n";
 			}
 		}
-		$language_list .= '</ul>';
+		$language_list .= $tabs.'</ul>'."\n";
 		return $language_list;
 	}
 
