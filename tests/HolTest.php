@@ -1,6 +1,6 @@
 <?php
 
-include_once '../src/Hol/lang/class.language.php';
+include_once '../src/HolQaH/lang/class.language.php';
 
 class HolTest extends PHPUnit_Framework_TestCase {
 
