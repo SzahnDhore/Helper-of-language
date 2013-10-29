@@ -44,7 +44,7 @@ class language {
 
 	// --- Looks for a specific phrase and prints it.
 	public function phrase($phrase) {																				// --- Takes the name of the phrase to print as an argument.
-		return ( isset($this->phrasebook->$phrase) ? $this->phrasebook->$phrase : $this->settings['nophrase'] );	// --- If the specified phrase exists, return it. Otherwise, print the error phrase.
+		return ( isset($this->phrasebook->$phrase) ? $this->phrasebook->$phrase : $this->settings['no_phrase'] );	// --- If the specified phrase exists, return it. Otherwise, print the error phrase.
 	}
 
 
