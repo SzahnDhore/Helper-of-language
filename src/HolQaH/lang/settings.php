@@ -26,8 +26,8 @@ $settings = array(
 );
 
 // --- A few modifications to the settings to make sure all the paths work as intended.
-$installdir					= dirname(__FILE__).'/';							// --- The installation directory is the server directory with this file in it.
-$settings['dirurl']			= 'http://'.$_SERVER['DOMAIN_NAME'].dirname(str_replace($_SERVER['DOCUMENT_ROOT'], '', __FILE__));	// --- Creates an absolute URL for the installation directory.
+$installdir					= dirname(__FILE__).'/';								// --- The installation directory is the server directory with this file in it.
+$settings['dirurl']			= 'http://'.$_SERVER['HTTP_HOST'].dirname(str_replace($_SERVER['DOCUMENT_ROOT'], '', __FILE__));	// --- Creates an absolute URL for the installation directory.
 $settings['imagedirurl']	= $settings['dirurl'].'/'.$settings['imagedir'].'/';	// ---
 $settings['imagedir']		= $installdir.$settings['imagedir'].'/';
 $settings['phrasebookdir']	= $installdir.$settings['phrasebookdir'].'/';

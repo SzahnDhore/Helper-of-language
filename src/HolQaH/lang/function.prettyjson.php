@@ -1,4 +1,4 @@
-<?php namespace HolQaH;
+<?php
 
 /*
     json readable encode

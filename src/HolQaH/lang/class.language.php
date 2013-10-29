@@ -68,10 +68,9 @@ class language {
 		foreach ($library as $code => $name) {
 			if ($code=='_time' || $code=='_updated') {
 			} else {
-				$url = 'http://'.$_SERVER['HTTP_HOST'].rtrim(dirname($_SERVER['PHP_SELF']), '/\\').$_SERVER['PHP_SELF'];
-
-				$namestring = ($flags==true ? (file_exists($this->settings['imagedir'].$name['iso6393'].'.png') ? '<img class="'.$classname.'_img" src="'.$this->settings['imagedirurl'].$name['iso6393'].'.png" alt="'.$name['iso6393'].'" /><span class="'.$classname.'_name"> '.$name['name'].'</span>' : '<span class="'.$classname.'_name">'.$name['name'].'</span>' ) : $name['name'] );
+				$url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
 				$url .= ($code!=$this->settings['default_lang'] ? '?'.$this->settings['lang_variable'].'='.$code : '' );
+				$namestring = ($flags==true ? (file_exists($this->settings['imagedir'].$name['iso6393'].'.png') ? '<img class="'.$classname.'_img" src="'.$this->settings['imagedirurl'].$name['iso6393'].'.png" alt="'.$name['iso6393'].'" /><span class="'.$classname.'_name"> '.$name['name'].'</span>' : '<span class="'.$classname.'_name">'.$name['name'].'</span>' ) : $name['name'] );
 				$language_list .= $tabs_li.'<li class="'.$classname.'_'.$code.'"><a href="'.$url.'">'.$namestring.'</a></li>'."\n";
 			}
 		}
@@ -89,7 +88,9 @@ class language {
 		while ($file = readdir($phrasebookdir)) {		// --- Looks for files in the directory.
 			if (in_array($file,$ignore) == false) {		// --- Ignores the filetypes specified above.
 				$modified = filectime($this->settings['phrasebookdir'].$file);	// --- Checks the current file for time of modification.
-				$files[$file] = $modified;				// --- Writes the filename and modification time to an array.
+				//$files[$file] = $modified;				// --- Writes the filename and modification time to an array.
+				$i = substr($file, 0, -4);
+				$files[$i] = $modified;
 			}
 		}
 
@@ -119,7 +120,7 @@ class language {
 		include_once 'function.prettyjson.php';
 
 		foreach ($files as $filename => $modified) {
-			include $this->settings['phrasebookdir'].$filename;
+			include $this->settings['phrasebookdir'].$filename.'.php';
 			foreach ($phrasebook['pbook_meta'] as $key => $value) {
 				$library[$phrasebook['pbook_meta']['iso6393']][$key] = $value;
 			}
