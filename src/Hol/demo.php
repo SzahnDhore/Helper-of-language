@@ -1,4 +1,4 @@
-<?php
+<?php namespace HolQaH;
 
 // --- Setting up simple benchmarking for the script.
 $start_time = microtime(true);

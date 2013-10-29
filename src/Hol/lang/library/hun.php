@@ -1,4 +1,4 @@
-<?php
+<?php namespace HolQaH;
 
 $phrasebook = array(
 

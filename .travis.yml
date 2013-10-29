@@ -1,15 +1,18 @@
 language: php
 
-before_script:
- - pear channel-discover pear.phpunit.de
- - pear install phpunit/PHP_Invoker
- - pear install phpunit/DbUnit
- - pear install phpunit/PHPUnit_Selenium
- - pear install phpunit/PHPUnit_Story
-
 php:
  - 5.3
  - 5.4
- - 5.5
+# - 5.5
 
-script: phpunit --coverage-text
+before_script:
+ - curl -s http://getcomposer.org/installer | php
+ - php composer.phar install
+# - pear channel-discover pear.phpunit.de
+# - pear install phpunit/PHP_Invoker
+# - pear install phpunit/DbUnit
+# - pear install phpunit/PHPUnit_Selenium
+# - pear install phpunit/PHPUnit_Story
+
+script: phpunit
+#script: phpunit --coverage-text

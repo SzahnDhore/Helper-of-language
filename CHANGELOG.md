@@ -11,10 +11,13 @@ Version numbering follows the pattern: *[major].[minor].[miniscule]*. Numbers be
 Current version [![Build Status](https://travis-ci.org/SzahnDhore/Helper-of-language.png?branch=master)](https://travis-ci.org/SzahnDhore/Helper-of-language)
 ---------------
 
-### v0.4.2 // 2013-10-29
+### v0.5.1 // 2013-10-29
 
 ##### Added
 + Added working Travis-CI support.
+
+##### Changed
+* Filestructure changed to better work with testing.
 
 
 Older versions

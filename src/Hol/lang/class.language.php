@@ -1,4 +1,4 @@
-<?php
+<?php namespace HolQaH;
 
 // ====================================================================================
 // Author: Staffan Lindsgård
@@ -9,7 +9,11 @@
 // ====================================================================================
 
 
-// --- This is the class we'll be working with.
+// --- Setting up the script for CI-testing.
+use InvalidArgumentException;
+
+
+// --- The class we'll be working with.
 class language {
 
 
@@ -17,22 +21,20 @@ class language {
 	public function __construct() {
 		include dirname(__FILE__).'/settings.php';	// --- Includes the settings file.
 		$this->settings = $settings;				// --- Stores the settings in a class-wide variable.
-		$this->phrasebookdir = $this->settings['phrasebookdir'].'/';	// --- Sets the phrasebook directory to a class-wide variable.
-
 		$specified_lang = ( isset($_GET[$this->settings['lang_variable']]) ? $_GET[$this->settings['lang_variable']] : $this->settings['default_lang'] );	// --- Recieves the incoming language variable and, if it isn't empty, assigns it to a variable.
 
-		if (file_exists($this->phrasebookdir.$this->settings['default_lang'].'.php')) {	// --- If a phrasebook for the default language exists,
-			include_once $this->phrasebookdir.$this->settings['default_lang'].'.php';	// --- include it in the script and...
+		if (file_exists($this->settings['phrasebookdir'].$this->settings['default_lang'].'.php')) {	// --- If a phrasebook for the default language exists,
+			include_once $this->settings['phrasebookdir'].$this->settings['default_lang'].'.php';	// --- include it in the script and...
 			$default_phrasebook = $phrasebook;											// --- ... load the default phrasebook into an array.
 		} else {
 			$default_phrasebook = array();												// --- If the phrasebook doesn't exist we set an empty array.
 		}
 
-		if ($specified_lang!=$this->settings['default_lang'] && file_exists($this->phrasebookdir.$specified_lang.'.php')) {		// --- If the specified language isn't the same as the default and a phrasebook for the specified language exists,
-			include_once $this->phrasebookdir.$specified_lang.'.php';		// --- include it in the script and...
+		if ($specified_lang!=$this->settings['default_lang'] && file_exists($this->settings['phrasebookdir'].$specified_lang.'.php')) {		// --- If the specified language isn't the same as the default and a phrasebook for the specified language exists,
+			include_once $this->settings['phrasebookdir'].$specified_lang.'.php';		// --- include it in the script and...
 			$specified_phrasebook = $phrasebook;							// --- ... load the specified phrasebook into an array.
 		} else {
-			$specified_phrasebook = array()								// --- If the phrasebook doesn't exist we set an empty array.
+			$specified_phrasebook = array();								// --- If the phrasebook doesn't exist we set an empty array.
 		}
 
 		$this->phrasebook = (object) array_merge($default_phrasebook,$specified_phrasebook);	// --- Merge the default and the specified phrasebooks, overwriting default values with specific ones.
@@ -68,7 +70,7 @@ class language {
 			} else {
 				$url = 'http://'.$_SERVER['HTTP_HOST'].rtrim(dirname($_SERVER['PHP_SELF']), '/\\').$_SERVER['PHP_SELF'];
 
-				$namestring = ($flags==true ? (file_exists($this->settings['imagedir'].'/'.$name['iso6393'].'.png') ? '<img class="'.$classname.'_img" src="'.$this->settings['imagedirurl'].'/'.$name['iso6393'].'.png" alt="'.$name['iso6393'].'" /><span class="'.$classname.'_name">'.$name['name'].'</span>' : '<span class="'.$classname.'_name">'.$name['name'].'</span>' ) : $name['name'] );
+				$namestring = ($flags==true ? (file_exists($this->settings['imagedir'].$name['iso6393'].'.png') ? '<img class="'.$classname.'_img" src="'.$this->settings['imagedirurl'].$name['iso6393'].'.png" alt="'.$name['iso6393'].'" /><span class="'.$classname.'_name"> '.$name['name'].'</span>' : '<span class="'.$classname.'_name">'.$name['name'].'</span>' ) : $name['name'] );
 				$url .= ($code!=$this->settings['default_lang'] ? '?'.$this->settings['lang_variable'].'='.$code : '' );
 				$language_list .= $tabs_li.'<li class="'.$classname.'_'.$code.'"><a href="'.$url.'">'.$namestring.'</a></li>'."\n";
 			}
@@ -82,16 +84,16 @@ class language {
 	// --- Reads the contents of a directory and returns an array with names and dates of modification for each file.
 	public function getDir() {
 		$ignore = array('.','..');						// --- We don't want to list everything.
-		$phrasebookdir = opendir($this->phrasebookdir);	// --- The directory is opened for reading.
+		$phrasebookdir = opendir(rtrim($this->settings['phrasebookdir'],'/'));	// --- The directory is opened for reading.
 
 		while ($file = readdir($phrasebookdir)) {		// --- Looks for files in the directory.
 			if (in_array($file,$ignore) == false) {		// --- Ignores the filetypes specified above.
-				$modified = filectime($this->phrasebookdir.$file);	// --- Checks the current file for time of modification.
+				$modified = filectime($this->settings['phrasebookdir'].$file);	// --- Checks the current file for time of modification.
 				$files[$file] = $modified;				// --- Writes the filename and modification time to an array.
 			}
 		}
 
-		closedir($this->phrasebookdir);	// --- When we're done with all files, so the directory is closed.
+		closedir(rtrim($this->settings['phrasebookdir'],'/'));	// --- When we're done with all files, so the directory is closed.
 		ksort($files);					// --- The array is sorted, keeping the key associations.
 		return json_encode($files);		// --- Then the array is converted into json format and sent.
 	}
@@ -117,7 +119,7 @@ class language {
 		include_once 'function.prettyjson.php';
 
 		foreach ($files as $filename => $modified) {
-			include $this->phrasebookdir.$filename;
+			include $this->settings['phrasebookdir'].$filename;
 			foreach ($phrasebook['pbook_meta'] as $key => $value) {
 				$library[$phrasebook['pbook_meta']['iso6393']][$key] = $value;
 			}
@@ -133,7 +135,6 @@ class language {
 		if ($this->changed() === true) {
 			$this->update();
 		}
-
 		return json_decode(file_get_contents($this->settings['libraryfile']),true);
 	}
 
