@@ -3,9 +3,6 @@
 // --- Includes the main language file.
 require_once dirname(__FILE__).'/../src/HolQaH/lang/class.language.php';
 
-// --- Mocks a file system.
-use org\bovigo\vfs\vfsStream;
-
 // --- Test class.
 class languageTest extends PHPUnit_Framework_TestCase {
 
