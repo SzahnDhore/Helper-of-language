@@ -1,4 +1,4 @@
-<?php namespace HolQaH;
+<?php namespace HolQaH;	// --- Yes, it means 'Language help' in klingon.
 
 // ====================================================================================
 // Author: Staffan Lindsgård

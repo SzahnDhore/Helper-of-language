@@ -11,8 +11,7 @@ $settings = array(
 	'default_lang'		=> 'swe',			// --- Default language to use if no value is passed to the constructor. This language file must be present in the library and should be complete.
 	'no_phrase'			=> '(( -- ERROR: Phrase not in phrasebook. -- ))',		// --- String to replace any non-existing phrase.
 	'lang_variable'		=> 'lang',			// --- Name of $_GET-variable for the language.
-	'lang_list_class'	=> 'languagelist',		// --- Class name of the language list.
-
+	'lang_list_class'	=> 'languagelist',	// --- Class name of the language list.
 
 
 // ============================================================================

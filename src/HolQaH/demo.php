@@ -22,7 +22,7 @@ $lang = new language();						// --- Initiates the language library.
 			html { background-color:#823345; }
 			body { background-color:#F2D9BB; color:#2E2D2C; max-width:600px; margin:1em auto; padding:1em; font-family:sans-serif; }
 			dl { border:1px dashed #2E2D2C; border-right:none; border-left:none; padding-top:0.5em; }
-			dt { font-weight:bold; float:left; width:10em; height:1.9em; }
+			dt { font-weight:bold; float:left; width:50%; height:1.9em; }
 			dd { clear:right; height:2em; }
 		</style>
 	</head>
