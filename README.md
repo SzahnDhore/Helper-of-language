@@ -1,9 +1,11 @@
-Hol - Helper of language
+Hol - Helper of language 
 ========================
 
 Hol is an unofficial PHP library that helps you with the handling of multiple languages in your PHP project. It is not yet fully tested or fleshed out, but should contain most of what is needed for simple use.
 
 Hol is © 2013 by Staffan Lindsgård and is made available to the general public under the GPLv3 license.
+
+[![Build Status](https://travis-ci.org/SzahnDhore/Helper-of-language.png?branch=master)](https://travis-ci.org/SzahnDhore/Helper-of-language)
 
 ### Contents:
 1. The usual disclaimer
