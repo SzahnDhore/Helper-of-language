@@ -24,9 +24,9 @@ class languageTest extends PHPUnit_Framework_TestCase {
 		$this->assertInstanceOf('HolQaH\language', $this->lang);
 	}
 
-	public function testSettings() {
-		$this->assertObjectHasAttribute('phrase', $this->lang);
-	}
+	// public function testSettings() {
+		// $this->assertObjectHasAttribute('phrase', $this->lang);
+	// }
 
 }
 

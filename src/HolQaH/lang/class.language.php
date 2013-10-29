@@ -31,10 +31,10 @@ class language {
 		}
 
 		if ($specified_lang!=$this->settings['default_lang'] && file_exists($this->settings['phrasebookdir'].$specified_lang.'.php')) {		// --- If the specified language isn't the same as the default and a phrasebook for the specified language exists,
-			include_once $this->settings['phrasebookdir'].$specified_lang.'.php';		// --- include it in the script and...
-			$specified_phrasebook = $phrasebook;							// --- ... load the specified phrasebook into an array.
+			include_once $this->settings['phrasebookdir'].$specified_lang.'.php';	// --- include it in the script and...
+			$specified_phrasebook = $phrasebook;									// --- ... load the specified phrasebook into an array.
 		} else {
-			$specified_phrasebook = array();								// --- If the phrasebook doesn't exist we set an empty array.
+			$specified_phrasebook = array();										// --- If the phrasebook doesn't exist we set an empty array.
 		}
 
 		$this->phrasebook = (object) array_merge($default_phrasebook,$specified_phrasebook);	// --- Merge the default and the specified phrasebooks, overwriting default values with specific ones.
@@ -82,21 +82,19 @@ class language {
 
 	// --- Reads the contents of a directory and returns an array with names and dates of modification for each file.
 	public function getDir() {
-		$ignore = array('.','..');						// --- We don't want to list everything.
+		$ignore = array('.','..');												// --- We don't want to list everything.
 		$phrasebookdir = opendir(rtrim($this->settings['phrasebookdir'],'/'));	// --- The directory is opened for reading.
 
-		while ($file = readdir($phrasebookdir)) {		// --- Looks for files in the directory.
-			if (in_array($file,$ignore) == false) {		// --- Ignores the filetypes specified above.
+		while ($file = readdir($phrasebookdir)) {								// --- Looks for files in the directory.
+			if (in_array($file,$ignore) == false) {								// --- Ignores the filetypes specified above.
 				$modified = filectime($this->settings['phrasebookdir'].$file);	// --- Checks the current file for time of modification.
-				//$files[$file] = $modified;				// --- Writes the filename and modification time to an array.
-				$i = substr($file, 0, -4);
-				$files[$i] = $modified;
+				$files[substr($file, 0, -4)] = $modified;						// --- Writes the filename (minus the extention) and modification time to an array.
 			}
 		}
 
-		closedir(rtrim($this->settings['phrasebookdir'],'/'));	// --- When we're done with all files, so the directory is closed.
-		ksort($files);					// --- The array is sorted, keeping the key associations.
-		return json_encode($files);		// --- Then the array is converted into json format and sent.
+		closedir(rtrim($this->settings['phrasebookdir'],'/'));	// --- When we're done with all files, the directory is closed.
+		ksort($files);											// --- The array is sorted, keeping the key associations.
+		return json_encode($files);								// --- Then the array is converted into json format and sent.
 	}
 
 
