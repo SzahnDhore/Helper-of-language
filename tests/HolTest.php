@@ -4,7 +4,7 @@
 require_once dirname(__FILE__).'/../src/HolQaH/lang/class.language.php';
 
 // --- Test class.
-class HolTest extends PHPUnit_Framework_TestCase {
+class languageTest extends PHPUnit_Framework_TestCase {
 
 	private $lang = null;
 
@@ -16,11 +16,16 @@ class HolTest extends PHPUnit_Framework_TestCase {
 		$this->lang = null;
 	}
 
-	/**
-	 * @test
-	 */
+
+	// ====================================================================================
+	// The actual tests.
+
 	public function testInstanceOf() {
-		$this->assertInstanceOf('HolQaH\language',$this->lang);
+		$this->assertInstanceOf('HolQaH\language', $this->lang);
+	}
+
+	public function testSettings() {
+		$this->assertObjectHasAttribute('settings', $this->lang);
 	}
 
 }
