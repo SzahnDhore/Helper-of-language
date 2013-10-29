@@ -25,7 +25,7 @@ class languageTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testSettings() {
-		$this->assertObjectHasAttribute('settings', $this->lang);
+		$this->assertObjectHasAttribute('phrase', $this->lang);
 	}
 
 }

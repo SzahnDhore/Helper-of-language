@@ -25,9 +25,9 @@ class language {
 
 		if (file_exists($this->settings['phrasebookdir'].$this->settings['default_lang'].'.php')) {	// --- If a phrasebook for the default language exists,
 			include_once $this->settings['phrasebookdir'].$this->settings['default_lang'].'.php';	// --- include it in the script and...
-			$default_phrasebook = $phrasebook;											// --- ... load the default phrasebook into an array.
+			$default_phrasebook = $phrasebook;														// --- ... load the default phrasebook into an array.
 		} else {
-			$default_phrasebook = array();												// --- If the phrasebook doesn't exist we set an empty array.
+			$default_phrasebook = array();															// --- If the phrasebook doesn't exist we set an empty array.
 		}
 
 		if ($specified_lang!=$this->settings['default_lang'] && file_exists($this->settings['phrasebookdir'].$specified_lang.'.php')) {		// --- If the specified language isn't the same as the default and a phrasebook for the specified language exists,
