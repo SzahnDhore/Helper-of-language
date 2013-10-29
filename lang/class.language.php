@@ -32,11 +32,10 @@ class language {
 			include_once $this->phrasebookdir.$specified_lang.'.php';		// --- include it in the script and...
 			$specified_phrasebook = $phrasebook;							// --- ... load the specified phrasebook into an array.
 		} else {
-			$specified_phrasebook = array();								// --- If the phrasebook doesn't exist we set an empty array.
+			$specified_phrasebook = array()								// --- If the phrasebook doesn't exist we set an empty array.
 		}
 
 		$this->phrasebook = (object) array_merge($default_phrasebook,$specified_phrasebook);	// --- Merge the default and the specified phrasebooks, overwriting default values with specific ones.
-
 	}
 
 

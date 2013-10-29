@@ -33,7 +33,7 @@ $lang = new language();						// --- Initiates the language library.
 
 		<p><?=$lang->phrase('fr_para')?></p>
 		<dl>
-			<dt><?=$langs->phrase('name')?></dt>
+			<dt><?=$lang->phrase('name')?></dt>
 			<dd><?=$lang->getinfo('name')?></dd>
 			<dt><?=$lang->phrase('iso6391')?></dt>
 			<dd><?=$lang->getinfo('iso6391')?></dd>
