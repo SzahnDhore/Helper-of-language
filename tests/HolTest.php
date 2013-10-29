@@ -16,12 +16,11 @@ class HolTest extends PHPUnit_Framework_TestCase {
 		$this->lang = null;
 	}
 
-	// public function testInstanceOf() {
-		// $this->assertInstanceOf('HolQaH\language',$this->lang);
-	// }
-
-	public function testInvalidArgumentIsProperlyThrown() {
-		$this->lang->phrase('nonExistentPhrase');
+	/**
+	 * @test
+	 */
+	public function testInstanceOf() {
+		$this->assertInstanceOf('HolQaH\language',$this->lang);
 	}
 
 }
