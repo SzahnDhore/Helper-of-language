@@ -8,8 +8,17 @@ Version numbering follows the pattern: *[major].[minor].[miniscule]*. Numbers be
 * **Miniscule** updates contain small edits and bugfixes.
 
 
-Current version [![Build Status](https://travis-ci.org/SzahnDhore/Helper-of-language.png?branch=master)](https://travis-ci.org/SzahnDhore/Helper-of-language)
+Current version
 ---------------
+
+### v0.5.2 // 2014-01-14
+
+##### Removed
+* Since I couldn't get Travis-CI to work I removed support for it. Might be added back again later when I know more about how to write tests for Travis.
+
+
+Older versions
+--------------
 
 ### v0.5.1 // 2013-10-29
 
@@ -19,9 +28,6 @@ Current version [![Build Status](https://travis-ci.org/SzahnDhore/Helper-of-lang
 ##### Changed
 * Filestructure changed to better work with testing.
 
-
-Older versions
---------------
 
 ### v0.4.1 // 2013-10-24
 
